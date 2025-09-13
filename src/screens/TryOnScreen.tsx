@@ -213,18 +213,3 @@ const TryOnScreen: React.FC = () => {
 }
 
 export default TryOnScreen
-          className={`w-full flex items-center justify-center ${
-            selectedBody && selectedGarment
-              ? 'btn-primary'
-              : 'bg-hotswap-border text-hotswap-gray cursor-not-allowed'
-          }`}
-        >
-          <Sparkles size={20} className="mr-2" />
-          Try It On!
-        </button>
-      </div>
-    </div>
-  )
-}
-
-export default TryOnScreen
