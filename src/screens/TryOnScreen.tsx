@@ -195,14 +195,14 @@ const TryOnScreen: React.FC = () => {
 
       {/* Try-On Button */}
       <div className="pt-4">
+        const buttonClassName = selectedBody && selectedGarment && !loading
+          ? 'w-full flex items-center justify-center btn-primary'
+          : 'w-full flex items-center justify-center bg-hotswap-border text-hotswap-gray cursor-not-allowed';
+
         <button
           onClick={handleTryOn}
           disabled={!selectedBody || !selectedGarment}
-          className={`w-full flex items-center justify-center ${
-            selectedBody && selectedGarment && !loading
-              ? 'btn-primary'
-              : 'bg-hotswap-border text-hotswap-gray cursor-not-allowed'
-          }`}
+          className={buttonClassName}
         >
           <Sparkles size={20} className="mr-2" />
           {loading ? 'Generating...' : 'Try It On!'}
