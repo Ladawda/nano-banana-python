@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-hotswap-blue text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 active:opacity-70 min-h-[44px] flex items-center justify-center;
+  }
+  
+  .btn-secondary {
+    @apply border border-hotswap-border text-hotswap-black font-medium py-3 px-6 rounded-xl transition-all duration-200 active:opacity-70 min-h-[44px] flex items-center justify-center dark:border-hotswap-gray dark:text-white;
+  }
+  
+  .btn-icon {
+    @apply p-3 rounded-xl transition-all duration-200 active:opacity-70 min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-hotswap-dark-gray rounded-2xl shadow-card dark:shadow-card-dark;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-hotswap-border rounded-xl bg-white dark:bg-hotswap-dark-gray dark:border-hotswap-gray text-hotswap-black dark:text-white placeholder-hotswap-gray focus:outline-none focus:border-hotswap-blue transition-colors;
+  }
+  
+  .badge {
+    @apply bg-hotswap-pink text-white text-xs font-medium px-2 py-1 rounded-full;
+  }
+}
