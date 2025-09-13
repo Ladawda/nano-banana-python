@@ -153,7 +153,7 @@ const ClosetScreen: React.FC = () => {
               {garments.map((garment) => (
                 <div key={garment.id} className="card overflow-hidden">
                   <img
-                    src={garment.image}
+                    src={garment.image_url}
                     alt={garment.name}
                     className="w-full h-32 object-cover"
                   />

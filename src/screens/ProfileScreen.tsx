@@ -53,10 +53,10 @@ const ProfileScreen: React.FC = () => {
               {userProfile?.name || 'Fashion Lover'}
             </h2>
             <p className="text-white/90">
-              {userProfile?.measurements?.height || 'Complete your profile'}
+              {userProfile?.height || 'Complete your profile'}
             </p>
             <p className="text-white/90 text-sm">
-              Size {userProfile?.measurements?.size || 'Not set'}
+              Size {userProfile?.size || 'Not set'}
             </p>
           </div>
           <button className="btn-icon">

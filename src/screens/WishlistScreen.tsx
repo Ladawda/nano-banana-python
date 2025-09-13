@@ -37,7 +37,7 @@ const WishlistScreen: React.FC = () => {
           <div key={item.id} className="card p-4">
             <div className="flex items-start space-x-4">
               <img
-                src={item.image}
+                src={item.image_url}
                 alt={item.name}
                 className="w-20 h-20 object-cover rounded-xl"
               />

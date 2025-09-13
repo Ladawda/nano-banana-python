@@ -21,7 +21,11 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
       setUserProfile({
         id: '1',
         name,
-        measurements: { height, size }
+        height,
+        size,
+        body_image_url: '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
       })
       onComplete()
     }

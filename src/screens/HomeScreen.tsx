@@ -82,7 +82,7 @@ const HomeScreen: React.FC = () => {
             <div key={garment.id} className="card p-4">
               <div className="flex items-center space-x-4">
                 <img
-                  src={garment.image}
+                  src={garment.image_url}
                   alt={garment.name}
                   className="w-16 h-16 object-cover rounded-xl"
                 />
@@ -99,7 +99,7 @@ const HomeScreen: React.FC = () => {
                 >
                   <Heart
                     size={20}
-                    className={garment.isWishlisted ? 'text-hotswap-pink fill-current' : 'text-hotswap-gray'}
+                    className={garment.is_wishlisted ? 'text-hotswap-pink fill-current' : 'text-hotswap-gray'}
                   />
                 </button>
               </div>

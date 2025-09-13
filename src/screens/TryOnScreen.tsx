@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import { Camera, Upload, Sparkles, RotateCcw } from 'lucide-react'
+import { useTryOn } from '../hooks/useTryOn'
+import { useApp } from '../contexts/AppContext'
 
 const TryOnScreen: React.FC = () => {
   const [selectedBody, setSelectedBody] = useState<string | null>(null)
   const [selectedGarment, setSelectedGarment] = useState<string | null>(null)
   const [showResult, setShowResult] = useState(false)
+  const [resultImageUrl, setResultImageUrl] = useState<string | null>(null)
+  
+  const { createTryOnSession, loading } = useTryOn()
+  const { userProfile, garments } = useApp()
 
   const bodyProfiles = [
     {
@@ -19,26 +25,40 @@ const TryOnScreen: React.FC = () => {
     {
       id: '1',
       name: 'Classic White Tee',
-      image: 'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=200',
+      image_url: 'https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=200',
       category: 'Tops'
     },
     {
       id: '2',
       name: 'Denim Jacket',
-      image: 'https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=200',
+      image_url: 'https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=200',
       category: 'Outerwear'
     },
     {
       id: '3',
       name: 'Black Dress',
-      image: 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=200',
+      image_url: 'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=200',
       category: 'Dresses'
     }
   ]
 
-  const handleTryOn = () => {
+  const handleTryOn = async () => {
     if (selectedBody && selectedGarment) {
-      setShowResult(true)
+      const bodyProfile = bodyProfiles.find(p => p.id === selectedBody)
+      const garment = garmentOptions.find(g => g.id === selectedGarment)
+      
+      if (bodyProfile && garment) {
+        const session = await createTryOnSession(
+          bodyProfile.image,
+          [garment.image_url],
+          "Create a professional quality studio shoot showing the person wearing the garment with better lighting and depth of field."
+        )
+        
+        if (session?.result_image_url) {
+          setResultImageUrl(session.result_image_url)
+          setShowResult(true)
+        }
+      }
     }
   }
 
@@ -55,7 +75,7 @@ const TryOnScreen: React.FC = () => {
           <div className="card h-full flex flex-col items-center justify-center">
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=300&h=400"
+                src={resultImageUrl || "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=300&h=400"}
                 alt="Try-on result"
                 className="w-48 h-64 object-cover rounded-2xl"
               />
@@ -155,7 +175,7 @@ const TryOnScreen: React.FC = () => {
               }`}
             >
               <img
-                src={garment.image}
+                src={garment.image_url}
                 alt={garment.name}
                 className="w-full h-24 object-cover rounded-xl mb-3"
               />
@@ -178,6 +198,21 @@ const TryOnScreen: React.FC = () => {
         <button
           onClick={handleTryOn}
           disabled={!selectedBody || !selectedGarment}
+          className={`w-full flex items-center justify-center ${
+            selectedBody && selectedGarment && !loading
+              ? 'btn-primary'
+              : 'bg-hotswap-border text-hotswap-gray cursor-not-allowed'
+          }`}
+        >
+          <Sparkles size={20} className="mr-2" />
+          {loading ? 'Generating...' : 'Try It On!'}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default TryOnScreen
           className={`w-full flex items-center justify-center ${
             selectedBody && selectedGarment
               ? 'btn-primary'
