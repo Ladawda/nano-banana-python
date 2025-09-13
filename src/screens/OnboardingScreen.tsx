@@ -65,7 +65,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = ({ onComplete }) => {
               
               <input
                 type="text"
-                placeholder="Height (e.g., 5'6\")"
+                placeholder={`Height (e.g., 5'6")`}
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
                 className="input-field"
